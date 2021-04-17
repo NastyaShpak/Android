@@ -1,11 +1,13 @@
+using System;
+using Food.Domain;
+using Food.EFData;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Food.WebApi
 {
@@ -13,7 +15,25 @@ namespace Food.WebApi
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
+            //    try
+            //    {
+            //        var context = services.GetRequiredService<DataContext>();
+            //        var manager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+            //        var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+            //        context.Database.Migrate();
+            //        DataSeed.SeedDataAsync(context, manager, managerRole).Wait();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        var logger = services.GetRequiredService<ILogger<Program>>();
+            //        logger.LogError(ex, "An error occured during migration");
+            //    }
+            //}
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
